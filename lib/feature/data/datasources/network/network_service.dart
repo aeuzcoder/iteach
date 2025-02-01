@@ -101,10 +101,12 @@ class NetworkService {
   }
 
   static Future<String?> PUT(String api,
-      {Map<String, dynamic> body = const {}}) async {
+      {Map<String, dynamic> params = const {},
+      Map<String, dynamic> body = const {}}) async {
     try {
       var uri = Uri.https(getServer(), api);
-      var response = await client.put(uri, body: jsonEncode(body));
+      var response =
+          await client.put(uri, body: jsonEncode(body), params: params);
       if (response.statusCode == 200 || response.statusCode == 204) {
         return response.body;
       } else {
@@ -116,10 +118,11 @@ class NetworkService {
     return null;
   }
 
-  static Future<String?> DEL(String api) async {
+  static Future<String?> DEL(String api,
+      {Map<String, dynamic> params = const {}}) async {
     try {
       var uri = Uri.https(getServer(), api);
-      var response = await client.delete(uri);
+      var response = await client.delete(uri, params: params);
       if (response.statusCode == 200 || response.statusCode == 204) {
         return response.body;
       } else {
