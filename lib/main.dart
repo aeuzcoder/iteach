@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
             GetPage(name: '/login', page: () => LoginPage()),
             GetPage(name: '/splash', page: () => SplashPage()),
           ],
-          initialRoute: '/home',
+          initialRoute: '/splash',
         );
       },
     );

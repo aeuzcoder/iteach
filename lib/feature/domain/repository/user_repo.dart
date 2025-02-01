@@ -1,14 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:iteach/feature/domain/entities/sign_in_entity.dart';
-import 'package:iteach/feature/domain/entities/user_entity.dart';
+import 'package:iteach/feature/data/models/login_model.dart';
 
 abstract class UserRepo {
-  //SIGN IN
-  Future<Either<String, SignInEntity>> signIn(
+  //LOGIN
+  Future<Either<String, LoginModel>> login(
       {required String username, required String password});
 
-  //SIGN UP
-  Future<Either<String, String>> signUp({required UserEntity user});
+  //REFRESH TOKEN
+  Future<Either<String, String>> refreshToken(String currentToken);
 
   //CHECK INTERNET
   Future<bool> internetInfo();

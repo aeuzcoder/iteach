@@ -1,15 +1,15 @@
 // ignore_for_file: constant_identifier_names
 
 class ApiConstants {
-  static const String BASE_URL = 'mycaff.uz';
-  static const String USERS_CREATE_USERS = '/users/create_user';
-  static const String ORDER_CREATE = '/order/create';
+  static const String BASE_URL = 'iteachsystem.uz';
+  static const String REFRESH_TOKEN = '/refresh_token';
   static const String TOKEN = '/token';
-  static const String PRODUCT_GET = '/product/get';
-  static const String CATEGORY_GET = '/category/get';
-  static const String TABLE_GET = '/table/get';
-  static const String USERS_GET_OWN = '/users/get_own';
-  static const String UPLOAD_IMAGE = '/users/upload-image';
-  static const String USERS_UPDATE_PROFILE = '/users/update_profil';
-  static const String GET_OWN = '/order/get_own';
+  static const String USER_GET_OWN = '/user/get_own';
+  static const String USER_UPLOAD_IMAGE = 'user/upload-image';
+  static const String USER_UPDATE_OWN = 'user/update_own';
+  static const String COURSE_TEACHER_OWN_GROUP = '/course/teacher_own_group';
+  static const String GET_OWN_STUDENTS = '/student/get_own_students';
+  static const String ATTENDANCE_GET_ATTENDANCE =
+      '/attendance/get_attendances_for_teachers';
+  static const String ATTENDANCE_CREATE = '/attendance/create';
 }

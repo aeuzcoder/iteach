@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:iteach/feature/data/datasources/database/db_service.dart';
@@ -10,7 +11,7 @@ import 'base_controller.dart';
 
 class SplashController extends BaseController {
   initTimer() {
-    Timer(const Duration(seconds: 0), () {
+    Timer(const Duration(seconds: 1), () {
       _callNextPage();
     });
   }
@@ -20,10 +21,29 @@ class SplashController extends BaseController {
       Get.off(() => const OfflinePage());
     } else {
       if (DBService.to.getAccessToken().isNotEmpty) {
-        Get.off(() => const HomePage());
+        final res = await refreshToken(DBService.to.getAccessToken());
+        if (res == null) {
+          Get.off(() => const LoginPage());
+        } else {
+          log('NEW TOKEN: $res');
+          Get.off(() => const HomePage());
+        }
       } else {
         Get.off(() => const LoginPage());
       }
     }
+  }
+
+  Future<String?> refreshToken(String currentToken) async {
+    var result = await userRepo.refreshToken(currentToken);
+    return result.fold((error) {
+      log('ERROR ON REFRESH TOKEN: $error');
+
+      return null;
+    }, (token) async {
+      await DBService.to.delAccessToken();
+      await DBService.to.setAccessToken(token);
+      return token;
+    });
   }
 }

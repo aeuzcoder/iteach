@@ -6,17 +6,14 @@ import 'package:iteach/core/errors/exception.dart';
 import 'package:iteach/core/network/api_constants.dart';
 import 'package:iteach/core/services/network_info.dart';
 import 'package:iteach/feature/data/datasources/network/network_service.dart';
-import 'package:iteach/feature/data/models/sign_in_model.dart';
-import 'package:iteach/feature/data/models/user_model.dart';
-import 'package:iteach/feature/domain/entities/sign_in_entity.dart';
-import 'package:iteach/feature/domain/entities/user_entity.dart';
+import 'package:iteach/feature/data/models/login_model.dart';
 import 'package:iteach/feature/domain/repository/user_repo.dart';
 
 class UserRepoImpl implements UserRepo {
   final NetworkInfo networkInfo;
   UserRepoImpl({required this.networkInfo});
   @override
-  Future<Either<String, SignInEntity>> signIn(
+  Future<Either<String, LoginModel>> login(
       {required String username, required String password}) async {
     try {
       final response = await NetworkService.POST(
@@ -29,23 +26,11 @@ class UserRepoImpl implements UserRepo {
       );
       final resultJson = jsonDecode(response!);
 
-      final result = SignInModel.fromJson(resultJson);
+      final result = LoginModel.fromJson(resultJson);
 
       return Right(result);
     } on InvalidInputException {
       return Left('Login yoki parolda xatolik');
-    } catch (e) {
-      return Left(e.toString());
-    }
-  }
-
-  @override
-  Future<Either<String, String>> signUp({required UserEntity user}) async {
-    try {
-      var response = await NetworkService.POST(
-          ApiConstants.USERS_CREATE_USERS, createUserFromEntity(user));
-      var result = jsonDecode(response ?? '');
-      return Right(result['message']);
     } catch (e) {
       return Left(e.toString());
     }
@@ -59,6 +44,19 @@ class UserRepoImpl implements UserRepo {
       return false;
     } else {
       return true;
+    }
+  }
+
+  @override
+  Future<Either<String, String>> refreshToken(String currentToken) async {
+    try {
+      final response = await NetworkService.POST(
+          ApiConstants.REFRESH_TOKEN, NetworkService.paramsEmpty());
+      final resultJson = jsonDecode(response!);
+      String result = resultJson['access_token'];
+      return Right(result);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 }

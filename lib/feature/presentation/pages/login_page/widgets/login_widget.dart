@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iteach/core/utils/app_colors.dart';
 import 'package:iteach/feature/presentation/pages/login_page/widgets/text_field_widget.dart';
 
-class SignInWidget extends StatefulWidget {
-  const SignInWidget({
+class LoginWidget extends StatefulWidget {
+  const LoginWidget({
     super.key,
     required this.usernameCtr,
     required this.passwordCtr,
@@ -23,10 +23,10 @@ class SignInWidget extends StatefulWidget {
   final FocusNode usernameFocusNode;
   final FocusNode passwordFocusNode;
   @override
-  State<SignInWidget> createState() => _SignInWidgetState();
+  State<LoginWidget> createState() => _SignInWidgetState();
 }
 
-class _SignInWidgetState extends State<SignInWidget> {
+class _SignInWidgetState extends State<LoginWidget> {
   final ScrollController _scrollController = ScrollController();
 
   @override
