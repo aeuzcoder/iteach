@@ -95,7 +95,7 @@ class UserRepoImpl implements UserRepo {
       AttendanceModel attendance) async {
     try {
       var response = await NetworkService.POST(
-          ApiConstants.COURSE_CREATE, attendance.toJson());
+          ApiConstants.ATTENDANCE_CREATE, attendance.toJson());
       var resultJson = jsonDecode(response ?? '');
       return Right(resultJson['message'] ?? resultJson.toString());
     } catch (e) {
@@ -108,7 +108,7 @@ class UserRepoImpl implements UserRepo {
     try {
       var response = await NetworkService.DEL(
         ApiConstants.ATTENDANCE_DELETE,
-        params: {"attendance_id": attendanceId},
+        params: {"attendance_id": attendanceId.toString()},
       );
 
       var resultJson = jsonDecode(response ?? '');
@@ -123,7 +123,7 @@ class UserRepoImpl implements UserRepo {
     try {
       var response = await NetworkService.DEL(
         ApiConstants.COURSE_DELETE,
-        params: {"attendance_id": courseId},
+        params: {"course_id": courseId.toString()},
       );
 
       var resultJson = jsonDecode(response ?? '');
@@ -138,7 +138,7 @@ class UserRepoImpl implements UserRepo {
     try {
       var response = await NetworkService.DEL(
         ApiConstants.STUDENT_DELETE,
-        params: {"attendance_id": studentId},
+        params: {"student_id": studentId.toString()},
       );
 
       var resultJson = jsonDecode(response ?? '');
@@ -150,13 +150,14 @@ class UserRepoImpl implements UserRepo {
 
   @override
   Future<Either<String, List<AttendanceDetailModel>>> getAttendance(
-      {int? courseId, int? studentId}) async {
+      {int? courseId, int? studentId, String? today}) async {
     try {
       var response = await NetworkService.GET(
         ApiConstants.ATTENDANCE_GET_ATTENDANCE,
         {
-          if (courseId != null) "course_id": courseId,
-          if (studentId != null) "course_id": studentId
+          if (courseId != null) "course_id": courseId.toString(),
+          if (studentId != null) "student_id": studentId.toString(),
+          if (today != null) "attendance_date": today.toString()
         },
       );
       var resultJson = jsonDecode(response ?? '');
@@ -177,7 +178,7 @@ class UserRepoImpl implements UserRepo {
       var response = await NetworkService.GET(
         ApiConstants.ATTENDANCE_GET_ATTENDANCE_STATISTICS,
         {
-          if (studentId != null) "course_id": studentId,
+          if (studentId != null) "student_id": studentId.toString(),
         },
       );
       var resultJson = jsonDecode(response ?? '');
@@ -228,7 +229,7 @@ class UserRepoImpl implements UserRepo {
       var response = await NetworkService.GET(
         ApiConstants.STUDENT_GET_OWN_STUDENTS,
         {
-          if (courseId != null) "course_id": courseId,
+          if (courseId != null) "course_id": courseId.toString(),
         },
       );
       var resultJson = jsonDecode(response ?? '');
@@ -246,7 +247,7 @@ class UserRepoImpl implements UserRepo {
       {required String path, required int courseId}) async {
     try {
       var response = await NetworkService.POST(
-          ApiConstants.COURSE_UPLOAD_IMAGE, {"ident": courseId},
+          ApiConstants.COURSE_UPLOAD_IMAGE, {"ident": courseId.toString()},
           path: path);
       var result = jsonDecode(response ?? '');
       return Right(result['message'] ?? result.toString());
@@ -274,7 +275,7 @@ class UserRepoImpl implements UserRepo {
       {required int courseId, required Map<String, String> body}) async {
     try {
       var response = await NetworkService.PUT(ApiConstants.COURSE_UPDATE,
-          body: body, params: {"ident": courseId});
+          body: body, params: {"ident": courseId.toString()});
       var result = jsonDecode(response ?? '');
       return Right(result['message'] ?? 'null');
     } catch (e) {
@@ -299,7 +300,7 @@ class UserRepoImpl implements UserRepo {
       {required int attendaceId, required Map<String, String> body}) async {
     try {
       var response = await NetworkService.PUT(ApiConstants.ATTENDANCE_UPDATE,
-          body: body, params: {"ident": attendaceId});
+          body: body, params: {"attendance_id": attendaceId.toString()});
       var result = jsonDecode(response ?? '');
       return Right(result['message'] ?? 'null');
     } catch (e) {
@@ -312,7 +313,7 @@ class UserRepoImpl implements UserRepo {
       {required int studentId, required Map<String, String> body}) async {
     try {
       var response = await NetworkService.PUT(ApiConstants.STUDENT_UPDATE,
-          body: body, params: {"ident": studentId});
+          body: body, params: {"ident": studentId.toString()});
       var result = jsonDecode(response ?? '');
       return Right(result['message'] ?? 'null');
     } catch (e) {

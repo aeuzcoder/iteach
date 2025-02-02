@@ -6,16 +6,15 @@ class AppTheme {
   static var appTheme = ThemeData(
       useMaterial3: true,
       scaffoldBackgroundColor: AppColors.bgColor,
-      primaryColor: AppColors.black,
-      colorScheme: const ColorScheme.light(),
+      primaryColor: AppColors.widgetColor,
+      colorScheme: const ColorScheme.dark(),
       appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.bgColor,
+        backgroundColor: AppColors.widgetColor,
         elevation: 0,
         surfaceTintColor: Colors.transparent,
         titleTextStyle: TextStyle(
           fontSize: 18.sp,
           fontWeight: FontWeight.w600,
-          letterSpacing: 0.2,
           color: AppColors.black,
         ),
         centerTitle: true,
@@ -37,7 +36,7 @@ class AppTheme {
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: AppColors.bgColor,
-        unselectedItemColor: AppColors.n979C9E,
+        selectedItemColor: AppColors.widgetColor,
+        unselectedItemColor: AppColors.titleColor,
       ));
 }

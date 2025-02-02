@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iteach/core/utils/app_colors.dart';
 import 'package:iteach/feature/presentation/pages/login_page/widgets/text_field_widget.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -11,8 +10,6 @@ class LoginWidget extends StatefulWidget {
     super.key,
     required this.usernameCtr,
     required this.passwordCtr,
-    required this.usernameFocusNode,
-    required this.passwordFocusNode,
     required this.controllerH,
   });
 
@@ -20,8 +17,6 @@ class LoginWidget extends StatefulWidget {
   final TextEditingController passwordCtr;
   final GetxController controllerH;
 
-  final FocusNode usernameFocusNode;
-  final FocusNode passwordFocusNode;
   @override
   State<LoginWidget> createState() => _SignInWidgetState();
 }
@@ -48,10 +43,9 @@ class _SignInWidgetState extends State<LoginWidget> {
           children: [
             SizedBox(height: 20.h),
             TextFieldWidget(
-              title: 'Username',
+              title: 'Email',
               controller: widget.usernameCtr,
-              isUsername: true,
-              focusNode: widget.usernameFocusNode,
+              isEmail: true,
               controllerH: widget.controllerH,
             ),
             SizedBox(height: 24.h),
@@ -59,17 +53,9 @@ class _SignInWidgetState extends State<LoginWidget> {
               title: 'Password',
               controller: widget.passwordCtr,
               isPassword: true,
-              focusNode: widget.passwordFocusNode,
               controllerH: widget.controllerH,
             ),
             SizedBox(height: 20.h),
-            Text(
-              'Parolni unutdingizmi?',
-              style: TextStyle(
-                  fontSize: 14.sp,
-                  color: AppColors.widgetColor,
-                  fontWeight: FontWeight.w600),
-            ),
           ],
         ),
       ),

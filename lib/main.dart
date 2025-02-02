@@ -6,8 +6,11 @@ import 'package:iteach/core/config/app_theme.dart';
 import 'package:iteach/core/config/root_binding.dart';
 import 'package:iteach/core/services/root_service.dart';
 import 'package:iteach/core/utils/app_colors.dart';
+import 'package:iteach/feature/presentation/pages/course_page/course_page.dart';
 import 'package:iteach/feature/presentation/pages/home_page/home_page.dart';
 import 'package:iteach/feature/presentation/pages/login_page/login_page.dart';
+import 'package:iteach/feature/presentation/pages/main_page.dart';
+import 'package:iteach/feature/presentation/pages/profile_page.dart';
 import 'package:iteach/feature/presentation/pages/splash_page.dart';
 import 'package:iteach/service_locator.dart' as di;
 
@@ -25,10 +28,10 @@ void main() async {
     const SystemUiOverlayStyle(
       statusBarColor: AppColors.bgColor, // Прозрачный цвет
       statusBarIconBrightness:
-          Brightness.dark, // Темные иконки (для светлого фона)
+          Brightness.light, // Темные иконки (для светлого фона)
       systemNavigationBarColor:
           AppColors.bgColor, // Прозрачный цвет для нижней панели
-      systemNavigationBarIconBrightness: Brightness.dark, // Темные иконки
+      systemNavigationBarIconBrightness: Brightness.light, // Темные иконки
     ),
   );
 
@@ -56,8 +59,11 @@ class MyApp extends StatelessWidget {
           transitionDuration: const Duration(milliseconds: 100),
           getPages: [
             GetPage(name: '/home', page: () => HomePage()),
+            GetPage(name: '/main', page: () => MainPage()),
             GetPage(name: '/login', page: () => LoginPage()),
             GetPage(name: '/splash', page: () => SplashPage()),
+            GetPage(name: '/course', page: () => CoursePage()),
+            GetPage(name: '/profile', page: () => ProfilePage()),
           ],
           initialRoute: '/splash',
         );

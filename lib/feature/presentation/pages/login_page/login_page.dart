@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:iteach/core/utils/app_assets.dart';
 import 'package:iteach/core/utils/app_colors.dart';
 import 'package:iteach/feature/presentation/controllers/login_controller.dart';
-import 'package:iteach/feature/presentation/pages/home_page/home_page.dart';
 import 'package:iteach/feature/presentation/pages/login_page/widgets/login_widget.dart';
+import 'package:iteach/feature/presentation/pages/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,40 +18,11 @@ class _LoginPageState extends State<LoginPage> {
   final usernameCtr = TextEditingController();
   final passwordCtr = TextEditingController();
 
-  // Контроллер прокрутки
-  final ScrollController _scrollController = ScrollController();
-
-  // FocusNode для каждого поля ввода
-  final FocusNode _usernameFocusNode = FocusNode();
-  final FocusNode _passwordFocusNode = FocusNode();
-
-  void _scrollToField(FocusNode focusNode) {
-    if (focusNode.hasFocus) {
-      Future.delayed(Duration(milliseconds: 200), () {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: Duration(milliseconds: 200),
-          curve: Curves.easeInOut,
-        );
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _usernameFocusNode.addListener(() => _scrollToField(_usernameFocusNode));
-    _passwordFocusNode.addListener(() => _scrollToField(_passwordFocusNode));
-  }
-
   @override
   void dispose() {
     super.dispose();
     usernameCtr.dispose();
     passwordCtr.dispose();
-
-    _usernameFocusNode.dispose();
-    _passwordFocusNode.dispose();
   }
 
   @override
@@ -58,20 +30,32 @@ class _LoginPageState extends State<LoginPage> {
     return GetBuilder<LoginController>(
       builder: (controller) {
         return Scaffold(
-          backgroundColor: AppColors.white,
-          body: SingleChildScrollView(
-            controller: _scrollController,
-            child: Center(
+          backgroundColor: AppColors.bgColor,
+          body: Center(
+            child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 200.h),
+                  //LOGO
+                  Container(
+                    width: 180.w,
+                    decoration: BoxDecoration(
+                        // ignore: deprecated_member_use
+                        color: AppColors.grey.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(16)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0, vertical: 8),
+                      child: Image.asset(AppAssets.images.logo),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 24.h,
+                  ),
                   // TEXT FIELD
                   LoginWidget(
                     usernameCtr: usernameCtr,
                     passwordCtr: passwordCtr,
-                    usernameFocusNode: _usernameFocusNode,
-                    passwordFocusNode: _passwordFocusNode,
                     controllerH: controller,
                   ),
 
@@ -83,7 +67,8 @@ class _LoginPageState extends State<LoginPage> {
                             Text(
                               controller.errorOnPassword!,
                               style: TextStyle(
-                                  fontSize: 16.sp, color: AppColors.red),
+                                  fontSize: 16.sp,
+                                  color: AppColors.widgetColor),
                             ),
                             SizedBox(height: 20.h),
                           ],
@@ -99,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                             password: passwordCtr.text,
                           );
                           if (isAuth) {
-                            Get.offAll(() => HomePage());
+                            Get.offAll(() => MainPage());
                           }
                         }
                       },
@@ -108,20 +93,20 @@ class _LoginPageState extends State<LoginPage> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.r),
-                          color: AppColors.red,
+                          color: AppColors.widgetColor,
                           boxShadow: [
                             BoxShadow(
                               offset: Offset(0, 2),
                               blurRadius: 4.r,
                               // ignore: deprecated_member_use
-                              color: AppColors.grey.withOpacity(0.6),
+                              color: AppColors.black.withOpacity(0.2),
                             ),
                           ],
                         ),
                         child: Center(
                           child: controller.isLoading
                               ? CircularProgressIndicator(
-                                  color: AppColors.bgColor,
+                                  color: AppColors.titleColor,
                                   strokeWidth: 2.r,
                                 )
                               : Text(

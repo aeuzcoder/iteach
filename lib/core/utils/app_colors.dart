@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color widgetColor = Color(0xFFFA4A0C);
-  static const Color bgColor = Color(0xFFEDEDED);
+  static const Color widgetColor = Color(0xFF00975f);
+  static const Color wGrey = Color.fromARGB(255, 53, 62, 78);
+  static const Color bgColor = Color(0xFF222832);
   static const Color searchColor = Color(0xFFE6DFDF);
+  static const Color titleColor = Color(0xFFdecaa5);
 
   static const Color black = Color(0xFF000000);
-  static const Color grey = Color(0xFF9A9A9D);
+  static const Color grey = Color(0xFF767b81);
   static const Color red = Color(0xFFe73323);
 
   ///figma

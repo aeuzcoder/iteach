@@ -22,12 +22,12 @@ class AttendanceModel {
   }
 
   // Метод для преобразования объекта Attendance в JSON
-  Map<String, dynamic> toJson() {
+  Map<String, String> toJson() {
     return {
       'date': date,
-      'student_id': studentId,
-      'course_id': courseId,
-      'status': status,
+      'student_id': studentId.toString(),
+      'course_id': courseId.toString(),
+      'status': status.toString(),
     };
   }
 }

@@ -67,7 +67,7 @@ abstract class UserRepo {
 
   //GET ATTENDANCE
   Future<Either<String, List<AttendanceDetailModel>>> getAttendance(
-      {int? courseId, int? studentId});
+      {int? courseId, int? studentId, String? today});
 
   //SET ATTENDANCE
   Future<Either<String, String>> addAttendance(AttendanceModel attendance);

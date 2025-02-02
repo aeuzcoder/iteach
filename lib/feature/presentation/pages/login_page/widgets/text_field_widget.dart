@@ -3,16 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iteach/core/utils/app_colors.dart';
 import 'package:iteach/feature/presentation/controllers/login_controller.dart';
+import 'package:iteach/feature/presentation/controllers/profile_controller.dart';
 
 class TextFieldWidget extends StatefulWidget {
   final String title;
   final bool isName;
-  final bool isUsername;
+  final bool isPhone;
   final bool isEmail;
-  final bool isAddress;
   final bool isPassword;
   final TextEditingController controller;
-  final FocusNode focusNode;
+
   final GetxController controllerH;
 
   const TextFieldWidget(
@@ -20,11 +20,9 @@ class TextFieldWidget extends StatefulWidget {
       required this.title,
       required this.controller,
       this.isName = false,
-      this.isUsername = false,
+      this.isPhone = false,
       this.isEmail = false,
-      this.isAddress = false,
       this.isPassword = false,
-      required this.focusNode,
       required this.controllerH});
 
   @override
@@ -46,11 +44,10 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       }
     }
 
-    if (widget.isUsername) {
-      if (value.isEmpty) return 'Имя пользователя не должно быть пустым';
-      if (value.contains(' ')) {
-        return 'Имя пользователя не должно содержать пробелов';
-      }
+    if (widget.isPhone) {
+      if (value.isEmpty) return 'Не должно быть пустым';
+      if (value.contains(' ')) return 'Не должно содержать пробелов';
+      if (!RegExp(r'^\d+$').hasMatch(value)) return 'Должны быть только цифры';
     }
 
     if (widget.isEmail) {
@@ -58,10 +55,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       if (!RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(value)) {
         return 'Введите корректный Email';
       }
-    }
-
-    if (widget.isAddress) {
-      if (value.isEmpty) return 'Адрес не должен быть пустым';
     }
 
     if (widget.isPassword) {
@@ -82,26 +75,28 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
-          focusNode: widget.focusNode,
           onTapOutside: (tab) => FocusScope.of(context).unfocus(),
           controller: widget.controller,
           decoration: InputDecoration(
             labelText: widget.title,
             labelStyle: TextStyle(
-              color: AppColors.blvk02,
+              color: AppColors.white,
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
             ),
             errorText: errorMessage,
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.blvk01),
+              borderSide: BorderSide(color: AppColors.titleColor),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: AppColors.titleColor),
             ),
           ),
           style: TextStyle(
             decorationColor: AppColors.bgColor,
-            fontSize: 16.sp,
+            fontSize: 18.sp,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: Colors.white,
           ),
           onChanged: (value) {
             // Обновляем состояние с ошибкой
@@ -112,6 +107,16 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                   ((widget.controllerH) as LoginController).checkerValide(true);
                 } else {
                   ((widget.controllerH) as LoginController)
+                      .checkerValide(false);
+                }
+              }
+              if (widget.controllerH is ProfileController) {
+                ((widget.controllerH) as ProfileController).checkInitialState();
+                if (errorMessage == null) {
+                  ((widget.controllerH) as ProfileController)
+                      .checkerValide(true);
+                } else {
+                  ((widget.controllerH) as ProfileController)
                       .checkerValide(false);
                 }
               }
