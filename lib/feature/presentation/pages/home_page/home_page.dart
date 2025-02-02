@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
               if (controller.isLoading) {
                 return Center(
                   child: CircularProgressIndicator(
-                    color: AppColors.titleColor,
+                    color: AppColors.widgetColor,
                     strokeWidth: 2,
                   ),
                 );

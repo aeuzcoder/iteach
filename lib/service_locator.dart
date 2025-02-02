@@ -15,5 +15,5 @@ init() {
       () => NetworkInfoImpl(internetConnectionChecker: sl()));
 
   //External
-  sl.registerLazySingleton(() => InternetConnectionChecker.instance);
+  sl.registerLazySingleton(() => InternetConnectionChecker());
 }

@@ -11,7 +11,7 @@ import 'base_controller.dart';
 
 class SplashController extends BaseController {
   initTimer() {
-    Timer(const Duration(seconds: 0), () {
+    Timer(const Duration(milliseconds: 1500), () {
       _callNextPage();
     });
   }

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:iteach/core/errors/exception.dart';
 import 'package:iteach/core/network/api_constants.dart';
 import 'package:iteach/core/services/network_info.dart';
@@ -44,7 +45,9 @@ class UserRepoImpl implements UserRepo {
 
   @override
   Future<bool> internetInfo() async {
-    final bool result = await networkInfo.isConnected;
+    log('START');
+    final bool result = await InternetConnectionChecker().hasConnection;
+
     log('INTERNET: $result');
     if (result) {
       return false;
@@ -194,6 +197,7 @@ class UserRepoImpl implements UserRepo {
 
   @override
   Future<Either<String, List<CourseModel>>> getCourses() async {
+    log('GET COURSES');
     try {
       var response = await NetworkService.GET(
         ApiConstants.COURSE_TEACHER_OWN_GROUP,

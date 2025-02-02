@@ -15,6 +15,6 @@ class RootBinding implements Bindings {
     Get.lazyPut<CourseControlller>(() => CourseControlller(), fenix: true);
     Get.lazyPut<ProfileController>(() => ProfileController(), fenix: true);
     Get.put<MainController>(MainController(), permanent: true);
-    Get.put<HomeController>(HomeController(), permanent: true);
+    Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
   }
 }
