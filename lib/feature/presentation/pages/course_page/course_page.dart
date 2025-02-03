@@ -15,68 +15,84 @@ class CoursePage extends StatelessWidget {
       child: SafeArea(child: GetBuilder<CourseControlller>(
         builder: (controller) {
           return Scaffold(
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerFloat,
-              floatingActionButton: GestureDetector(
-                onTap: () async {
-                  await controller.setAttendances();
-                },
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 32.0.h),
-                  child: Container(
-                      height: 56.h,
-                      decoration: BoxDecoration(
-                        color: AppColors.widgetColor,
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Center(
-                            child: controller.isLoading2
-                                ? CircularProgressIndicator(
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: GestureDetector(
+              onTap: () async {
+                await controller.setAttendances();
+                if (controller.isChanged) {
+                  Get.snackbar('Muvaffaqiyatli', 'Davomat yozildi',
+                      colorText: AppColors.white, margin: EdgeInsets.all(12));
+                } else {
+                  Get.snackbar('Xatolik', 'Davomat yozilmadi',
+                      colorText: AppColors.white, margin: EdgeInsets.all(12));
+                }
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 32.0.h),
+                child: Container(
+                    height: 56.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.widgetColor,
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: controller.isLoading2
+                              ? CircularProgressIndicator(
+                                  color: AppColors.bgColor,
+                                  strokeWidth: 2,
+                                )
+                              : Text(
+                                  controller.isFirstAttendace
+                                      ? 'Saqlash'
+                                      : 'O\'zgartirish',
+                                  style: TextStyle(
                                     color: AppColors.bgColor,
-                                    strokeWidth: 2,
-                                  )
-                                : Text(
-                                    controller.isFirstAttendace
-                                        ? 'Saqlash'
-                                        : 'O\'zgartirish',
-                                    style: TextStyle(
-                                      color: AppColors.bgColor,
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                          ),
-                        ],
-                      )),
+                                ),
+                        ),
+                      ],
+                    )),
+              ),
+            ),
+            appBar: AppBar(
+              leading: GestureDetector(
+                onTap: () => Get.back(),
+                child: Icon(
+                  Icons.arrow_back_rounded,
+                  color: AppColors.titleColor,
+                  size: 24.w,
                 ),
               ),
-              appBar: AppBar(
-                centerTitle: true,
-                title: !controller.isLoading
-                    ? Text(
-                        controller.isFirstAttendace
-                            ? 'Davomat olinmadi'
-                            : 'Davomat olingan',
-                        style: TextStyle(
-                          color: AppColors.titleColor,
-                          fontSize: 20.sp,
-                        ),
-                      )
-                    : SizedBox(),
-                backgroundColor: AppColors.bgColor,
-              ),
-              body: controller.isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(
-                        color: AppColors.widgetColor,
-                        strokeWidth: 2,
+              centerTitle: true,
+              title: !controller.isLoading
+                  ? Text(
+                      controller.isFirstAttendace
+                          ? 'Davomat olinmadi'
+                          : 'Davomat olingan',
+                      style: TextStyle(
+                        color: AppColors.titleColor,
+                        fontSize: 20.sp,
                       ),
                     )
-                  : Padding(
-                      padding: EdgeInsets.all(12),
+                  : SizedBox(),
+              backgroundColor: AppColors.bgColor,
+            ),
+            body: controller.isLoading
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.widgetColor,
+                      strokeWidth: 2,
+                    ),
+                  )
+                : Padding(
+                    padding: EdgeInsets.all(12),
+                    child: SingleChildScrollView(
                       child: Column(
                         children: [
                           Padding(
@@ -105,7 +121,9 @@ class CoursePage extends StatelessWidget {
                           ),
                         ],
                       ),
-                    ));
+                    ),
+                  ),
+          );
         },
       )),
     );

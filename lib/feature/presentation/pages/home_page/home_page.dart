@@ -43,19 +43,25 @@ class HomePage extends StatelessWidget {
               //LOADED
               else {
                 //MAIN COLUMN
-                return Column(
-                  children: [
-                    //BUILDER
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: controller.courses.length,
-                      itemBuilder: (context, index) {
-                        final course = controller.courses[index];
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      //BUILDER
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: controller.courses.length,
+                        itemBuilder: (context, index) {
+                          final course = controller.courses[index];
 
-                        return CourseContainerWidget(course: course);
-                      },
-                    )
-                  ],
+                          return CourseContainerWidget(course: course);
+                        },
+                      ),
+                      SizedBox(
+                        height: 40.h,
+                      )
+                    ],
+                  ),
                 );
               }
             },

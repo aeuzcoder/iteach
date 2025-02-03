@@ -4,7 +4,7 @@ class AttendanceStatModel {
   final int totalClasses;
   final int presentClasses;
   final int absentClasses;
-  final int attendancePercentage;
+  final double attendancePercentage;
 
   AttendanceStatModel({
     required this.studentId,

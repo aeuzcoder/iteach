@@ -13,6 +13,7 @@ class CourseControlller extends BaseController {
   late List<AttendanceDetailModel> currentAttendances;
   bool isLoading2 = false;
   bool isFirstAttendace = true;
+  bool isChanged = false;
   Map<int, bool> attendances = {};
   @override
   void onInit() async {
@@ -88,6 +89,7 @@ class CourseControlller extends BaseController {
         }, (result) {
           log('RESULT(${attendance.studentId}): $result');
           isFirstAttendace = false;
+          isChanged = true;
           changeLoading2(false);
 
           return result;
@@ -110,6 +112,8 @@ class CourseControlller extends BaseController {
         }, (result) {
           log('RESULT(${attendance.studentId}): $result');
           isFirstAttendace = false;
+          isChanged = true;
+
           changeLoading2(false);
 
           return result;

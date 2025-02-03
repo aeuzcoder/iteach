@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:iteach/feature/presentation/controllers/attendance_controller.dart';
 import 'package:iteach/feature/presentation/controllers/course_controlller.dart';
 import 'package:iteach/feature/presentation/controllers/home_controller.dart';
 import 'package:iteach/feature/presentation/controllers/login_controller.dart';
@@ -14,6 +15,8 @@ class RootBinding implements Bindings {
     Get.lazyPut<SplashController>(() => SplashController(), fenix: true);
     Get.lazyPut<CourseControlller>(() => CourseControlller(), fenix: true);
     Get.lazyPut<ProfileController>(() => ProfileController(), fenix: true);
+    Get.lazyPut<AttendanceController>(() => AttendanceController(),
+        fenix: true);
     Get.put<MainController>(MainController(), permanent: true);
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
   }
