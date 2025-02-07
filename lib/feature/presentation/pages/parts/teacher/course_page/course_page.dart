@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iteach/core/utils/app_colors.dart';
 import 'package:iteach/feature/presentation/controllers/course_controlller.dart';
-import 'package:iteach/feature/presentation/pages/course_page/widgets/student_container_widget.dart';
+import 'package:iteach/feature/presentation/pages/parts/teacher/course_page/widgets/student_container_widget.dart';
 
 class CoursePage extends StatelessWidget {
   const CoursePage({super.key});

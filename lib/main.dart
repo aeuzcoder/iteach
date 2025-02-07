@@ -6,11 +6,11 @@ import 'package:iteach/core/config/app_theme.dart';
 import 'package:iteach/core/config/root_binding.dart';
 import 'package:iteach/core/services/root_service.dart';
 import 'package:iteach/core/utils/app_colors.dart';
-import 'package:iteach/feature/presentation/pages/course_page/course_page.dart';
-import 'package:iteach/feature/presentation/pages/home_page/home_page.dart';
+import 'package:iteach/feature/presentation/pages/parts/teacher/course_page/course_page.dart';
+import 'package:iteach/feature/presentation/pages/parts/teacher/home_page/home_page.dart';
 import 'package:iteach/feature/presentation/pages/login_page/login_page.dart';
-import 'package:iteach/feature/presentation/pages/main_page.dart';
-import 'package:iteach/feature/presentation/pages/profile_page.dart';
+import 'package:iteach/feature/presentation/pages/parts/teacher/teacher_page.dart';
+import 'package:iteach/feature/presentation/pages/parts/teacher/profile_page.dart';
 import 'package:iteach/feature/presentation/pages/splash_page.dart';
 import 'package:iteach/service_locator.dart' as di;
 
@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
           transitionDuration: const Duration(milliseconds: 100),
           getPages: [
             GetPage(name: '/home', page: () => HomePage()),
-            GetPage(name: '/main', page: () => MainPage()),
+            GetPage(name: '/teacher', page: () => TeacherPage()),
             GetPage(name: '/login', page: () => LoginPage()),
             GetPage(name: '/splash', page: () => SplashPage()),
             GetPage(name: '/course', page: () => CoursePage()),

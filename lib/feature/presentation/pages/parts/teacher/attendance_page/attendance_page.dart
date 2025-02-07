@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iteach/core/utils/app_colors.dart';
 import 'package:iteach/feature/presentation/controllers/attendance_controller.dart';
-import 'package:iteach/feature/presentation/pages/attendance_page/widgets/student_stat_widget.dart';
+import 'package:iteach/feature/presentation/pages/parts/teacher/attendance_page/widgets/student_stat_widget.dart';
 
 class AttendancePage extends StatelessWidget {
   const AttendancePage({super.key});

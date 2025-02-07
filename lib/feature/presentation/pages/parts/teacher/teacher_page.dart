@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iteach/core/utils/app_colors.dart';
 import 'package:iteach/feature/presentation/controllers/main_controller.dart';
-import 'package:iteach/feature/presentation/pages/attendance_page/attendance_page.dart';
-import 'package:iteach/feature/presentation/pages/home_page/home_page.dart';
-import 'package:iteach/feature/presentation/pages/profile_page.dart';
+import 'package:iteach/feature/presentation/pages/parts/teacher/attendance_page/attendance_page.dart';
+import 'package:iteach/feature/presentation/pages/parts/teacher/home_page/home_page.dart';
+import 'package:iteach/feature/presentation/pages/parts/teacher/profile_page.dart';
 
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+class TeacherPage extends StatelessWidget {
+  const TeacherPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +39,8 @@ class MainPage extends StatelessWidget {
             currentIndex: controller.currentIndex,
             onTap: controller.onChange,
             items: [
-              _navItem(Icons.home, 'Home'),
-              _navItem(Icons.border_color_outlined, 'Attendance'),
+              _navItem(Icons.home, 'Kurslar'),
+              _navItem(Icons.border_color_outlined, 'Statistika'),
               _navItem(Icons.person, 'Profile'),
             ],
           ),

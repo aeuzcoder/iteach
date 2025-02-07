@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iteach/core/utils/app_colors.dart';
 import 'package:iteach/feature/presentation/controllers/home_controller.dart';
-import 'package:iteach/feature/presentation/pages/home_page/widgets/course_container_widget.dart';
+import 'package:iteach/feature/presentation/pages/parts/teacher/home_page/widgets/course_container_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              'Home',
+              'Kurslar',
               style: TextStyle(
                 color: AppColors.titleColor,
                 fontSize: 20.sp,

@@ -2,10 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:iteach/core/errors/exception.dart';
 import 'package:iteach/core/network/api_constants.dart';
-import 'package:iteach/core/services/network_info.dart';
 import 'package:iteach/feature/data/datasources/network/network_service.dart';
 import 'package:iteach/feature/data/models/attendance_model.dart';
 import 'package:iteach/feature/data/models/attendance_stat_model.dart';
@@ -17,8 +15,6 @@ import 'package:iteach/feature/data/models/user_model.dart';
 import 'package:iteach/feature/domain/repository/user_repo.dart';
 
 class UserRepoImpl implements UserRepo {
-  final NetworkInfo networkInfo;
-  UserRepoImpl({required this.networkInfo});
   @override
   Future<Either<String, LoginModel>> login(
       {required String username, required String password}) async {
@@ -40,19 +36,6 @@ class UserRepoImpl implements UserRepo {
       return Left('Login yoki parolda xatolik');
     } catch (e) {
       return Left(e.toString());
-    }
-  }
-
-  @override
-  Future<bool> internetInfo() async {
-    log('START');
-    final bool result = await InternetConnectionChecker().hasConnection;
-
-    log('INTERNET: $result');
-    if (result) {
-      return false;
-    } else {
-      return true;
     }
   }
 

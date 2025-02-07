@@ -80,6 +80,4 @@ abstract class UserRepo {
   Future<Either<String, String>> deleteAttendance(int attendanceId);
 
   /*        CORE         */
-  //CHECK INTERNET
-  Future<bool> internetInfo();
 }

@@ -5,7 +5,7 @@ import 'package:iteach/core/utils/app_assets.dart';
 import 'package:iteach/core/utils/app_colors.dart';
 import 'package:iteach/feature/presentation/controllers/login_controller.dart';
 import 'package:iteach/feature/presentation/pages/login_page/widgets/login_widget.dart';
-import 'package:iteach/feature/presentation/pages/main_page.dart';
+import 'package:iteach/feature/presentation/pages/parts/teacher/teacher_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                             password: passwordCtr.text,
                           );
                           if (isAuth) {
-                            Get.offAll(() => MainPage());
+                            Get.offAll(() => TeacherPage());
                           }
                         }
                       },
